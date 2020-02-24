@@ -1,5 +1,5 @@
 /*
-Ring buffer procucer-consumer task solution.
+Ring buffer procucer-consumer. To show ability to use threads, mutexes and conditions, based on pthreads library.
 The application must be stopped by pressing Ctrl+C
 To build release run:
     make
@@ -61,7 +61,6 @@ int main(int argc, const char* argv[])
         perror("Create producer thread");
         run = 0;
     }
-    
     if(pthread_create(&cons_th, 0, consumer, 0)) { //if failed consumer thread, stop running
         perror("Create consumer thread");
         run = 0;
@@ -91,7 +90,6 @@ void* producer(void* ctx)
         RBufferInsert(rb, &val);
     }
     TRACE(stderr, "Producer stopping\n");
-    
     return 0;
 }
 
@@ -106,6 +104,5 @@ void* consumer(void* ctx)
         TRACE(stdout, "%d \n", *val);
     }
     TRACE(stderr, "Consumer stopping\n");
-    
     return 0;
 }
